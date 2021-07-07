@@ -67,6 +67,8 @@ const galleryItems = [
 const galleryContainer = document.querySelector('.js-gallery');
 console.log(galleryContainer);
 
-const images = galleryContainer.map(preview, original, description = {
+galleryContainer.insertAdjacentHTML('afterbegin', createGalleryMarkup(galleryItems));
+
+const images = galleryContainer.map( preview, original, description = {
   const imgEl = document.
 });
