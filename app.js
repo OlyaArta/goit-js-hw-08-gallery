@@ -63,3 +63,10 @@ const galleryItems = [
     description: 'Lighthouse Coast Sea',
   },
 ];
+
+const galleryContainer = document.querySelector('.js-gallery');
+console.log(galleryContainer);
+
+const images = galleryContainer.map(preview, original, description = {
+  const imgEl = document.
+});
