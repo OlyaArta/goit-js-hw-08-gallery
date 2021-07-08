@@ -67,8 +67,50 @@ const galleryItems = [
 const galleryContainer = document.querySelector('.js-gallery');
 console.log(galleryContainer);
 
-galleryContainer.insertAdjacentHTML('afterbegin', createGalleryMarkup(galleryItems));
+galleryContainer.insertAdjacentHTML('afterbegin', createGalleryCard(galleryItems));
 
-const images = galleryContainer.map( preview, original, description = {
-  const imgEl = document.
-});
+galleryContainer.addEventListener('click', onGalleryCard);
+
+function createGalleryCard(galleryItems) {
+  return galleryItems.map(({ preview, original, description }) => {
+    return `<li class="gallery__item">
+  <a
+    class="gallery__link"
+    href="${original}"
+  >
+    <img
+      class="gallery__image"
+      src="${preview}"
+      data-source="${original}"
+      alt="${description}"
+    />
+  </a>
+</li>`;
+  }).join('');
+};
+
+//делегирование
+function onGalleryCard(event) {
+  const isLinkEl = event.target.classList.contains('gallery__image');
+  if (!isLinkEl) {
+    return;
+  }
+  //запрет перехода по ссылке
+  event.preventDefault();
+
+//получение большого изображения
+let imageElement = event.target;
+
+  const originalImage = imageElement.getAttribute('data-source');
+
+  const imageInModalWindow = document.querySelector('.lightbox__image');
+  imageInModalWindow.setAttribute('src', `${originalImage}`);
+
+}
+
+
+//модалка isOpen
+const modalBox = document.querySelector('.js-lightbox');
+function onModalBOxOpen() {
+modalBox.classList.add('is-open');
+}
