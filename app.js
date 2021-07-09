@@ -101,16 +101,52 @@ function onGalleryCard(event) {
 //получение большого изображения
 let imageElement = event.target;
 
-  const originalImage = imageElement.getAttribute('data-source');
+const originalImage = imageElement.getAttribute('data-source');
 
-  const imageInModalWindow = document.querySelector('.lightbox__image');
-  imageInModalWindow.setAttribute('src', `${originalImage}`);
+const imageInModalWindow = document.querySelector('.lightbox__image');
+imageInModalWindow.setAttribute('src', `${originalImage}`);
 
-}
+onModalBOxOpen();   
+};
 
+onModalBoxClose();
+onModalBoxCloseButton();
+onModalBoxCloseOverlay();
+onModalCloseEscBtn();
 
 //модалка isOpen
-const modalBox = document.querySelector('.js-lightbox');
+const modalBox = document.querySelector('.lightbox');
 function onModalBOxOpen() {
 modalBox.classList.add('is-open');
+};
+
+// Закрытие модалки
+function onModalBoxClose(event) {
+  const modalBoxOpen = document.querySelector('.lightbox');
+  modalBoxOpen.classList.remove('is-open');
+
+  // Очистка значения атрибута src элемента img.lightbox__image
+  const imageInModalWindow = document.querySelector('.lightbox__image');
+  imageInModalWindow.setAttribute('src', '');
+};
+//закрытие модалки по крестику
+function onModalBoxCloseButton() {
+  const btnModalClose = document.querySelector('button[data-action="close-lightbox"]');
+ // console.log(btnModalClose);
+  btnModalClose.addEventListener('click', onModalBoxClose);
+};
+//закрытие модалки по оверлэю
+function onModalBoxCloseOverlay() {
+  const overlayModalClose = document.querySelector('.lightbox__overlay');
+  overlayModalClose.addEventListener('click', onModalBoxClose);
+};
+//закрытие модалки по esc
+function onModalCloseEscBtn() {
+ 
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+ 
+    onModalBoxClose()
+  }
+    });
 }
